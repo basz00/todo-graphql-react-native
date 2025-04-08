@@ -4,7 +4,9 @@
     "strict": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@/core/graphql/*": ["./src/core/graphql/*"]
+      "@/graphql/*": ["./src/core/graphql/*"],
+      "@/graphql": ["./src/core/graphql"],
+      "@/note/*": ["./src/features/note/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

@@ -1,15 +1,8 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { ApolloProvider } from "@apollo/client";
-import { apolloClient } from "@/core/graphql";
-import Dummy from "./Dummy";
+import NoteList from "./features/note/list/presentation/NoteList";
 
 const App = () => {
-  return (
-    <ApolloProvider client={apolloClient}>
-      <Dummy />
-    </ApolloProvider>
-  );
+  return <NoteList />;
 };
 
 export default App;

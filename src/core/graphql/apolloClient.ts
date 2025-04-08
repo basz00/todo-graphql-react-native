@@ -1,7 +1,6 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import Constants from "expo-constants";
 
-const graphqlUri = Constants.expoConfig?.extra?.graphqlUri;
+const graphqlUri = process.env.EXPO_PUBLIC_GRAPHQL_URI;
 
 const apolloClient = new ApolloClient({
   uri: graphqlUri,

@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { ConfigContext, ExpoConfig } from "expo/config";
 
 export default ({ config }: ConfigContext): ExpoConfig => {
@@ -40,9 +39,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ],
     experiments: {
       typedRoutes: true,
-    },
-    extra: {
-      GRAPHQL_URI: process.env.GRAPHQL_URI,
     },
   };
 };
