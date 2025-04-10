@@ -7,6 +7,8 @@ const Stack = createNativeStackNavigator();
 const RootStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="NoteList" component={NoteListScreen} />
-    <Stack.Screen name="CreateNode" component={CreateNoteScreen} />
+    <Stack.Screen name="CreateNote" component={CreateNoteScreen} />
   </Stack.Navigator>
 );
+
+export default RootStack;

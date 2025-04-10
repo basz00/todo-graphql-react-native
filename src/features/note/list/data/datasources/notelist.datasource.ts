@@ -1,5 +1,4 @@
-import { apolloClient } from "@/core/graphql";
-import { ReactiveQuery } from "@/core/graphql/query/ReactiveQuery";
+import { apolloClient, QueryGraphQLOp } from "@/core/graphql";
 import { gql } from "@apollo/client";
 import { Observable, of } from "rxjs";
 import { Todo } from "../entities";
@@ -19,7 +18,7 @@ const GET_TODOS = gql`
 
 export class FetchNoteListFromApi {
   constructor(
-    private reactiveQuery = new ReactiveQuery<Array<Todo>>(
+    private operation = new QueryGraphQLOp<Array<Todo>>(
       apolloClient,
       GET_TODOS,
       (data) => data.todos
@@ -27,10 +26,10 @@ export class FetchNoteListFromApi {
   ) {}
 
   fetchNotes() {
-    this.reactiveQuery.fetch();
+    this.operation.execute();
   }
 
   observeNotes(): Observable<RemoteState<Array<Todo>>> {
-    return this.reactiveQuery.observe();
+    return this.operation.observe();
   }
 }

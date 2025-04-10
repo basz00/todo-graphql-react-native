@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { 
+import {
   View,
   TextInput,
   Text,
@@ -7,16 +7,68 @@ import {
   Platform,
   ScrollView,
   Pressable,
-  StyleSheet 
+  StyleSheet,
 } from "react-native";
 import { useTheme } from "@/core/ui/theme/ThemeContext";
+import { colors as themeColors } from "@/core/ui/theme/colors";
+import { useCreateNote } from "@/note/create/presentation/hooks";
 
 const CreateNote = () => {
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
+
+  const { execute, state } = useCreateNote();
+
   const { colors } = useTheme();
 
-  const styles = StyleSheet.create({
+  const styles = makeStyles(colors);
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: 80 }} // Menyediakan ruang untuk tombol
+      >
+        <View style={styles.card}>
+          <TextInput
+            style={styles.input}
+            placeholder="Title"
+            placeholderTextColor={colors.text.disabled}
+            value={title}
+            onChangeText={setTitle}
+          />
+          <TextInput
+            style={[styles.input, styles.noteInput]}
+            placeholder="Note..."
+            placeholderTextColor={colors.text.disabled}
+            value={note}
+            onChangeText={setNote}
+            multiline
+            textAlignVertical="top"
+          />
+        </View>
+      </ScrollView>
+
+      <Pressable
+        style={({ pressed }) => [
+          styles.saveButton,
+          pressed && { opacity: 0.7, transform: [{ scale: 0.98 }] },
+        ]}
+        onPress={() => {
+          execute({ title, note });
+        }}
+      >
+        <Text style={styles.saveButtonText}>Save</Text>
+      </Pressable>
+    </KeyboardAvoidingView>
+  );
+};
+
+const makeStyles = (colors: typeof themeColors) =>
+  StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
@@ -42,63 +94,22 @@ const CreateNote = () => {
       fontSize: 14,
       color: colors.text.primary,
       minHeight: 100,
-      textAlignVertical: 'top',
+      textAlignVertical: "top",
     },
     saveButton: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 16,
       right: 16,
       left: 16,
       backgroundColor: colors.primary.main,
       padding: 16,
       borderRadius: 8,
-      alignItems: 'center',
+      alignItems: "center",
     },
     saveButtonText: {
       color: colors.text.inverse,
-      fontWeight: 'bold',
-    }
+      fontWeight: "bold",
+    },
   });
-
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
-      <ScrollView 
-        style={styles.container}
-        contentContainerStyle={{ paddingBottom: 80 }} // Menyediakan ruang untuk tombol
-      >
-        <View style={styles.card}>
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            placeholderTextColor={colors.text.disabled}
-            value={title}
-            onChangeText={setTitle}
-          />
-          <TextInput
-            style={[styles.input, styles.noteInput]}
-            placeholder="Note..."
-            placeholderTextColor={colors.text.disabled}
-            value={note}
-            onChangeText={setNote}
-            multiline
-            textAlignVertical="top"
-            numberOfLines={4}
-          />
-        </View>
-      </ScrollView>
-
-      {/* Floating Save Button */}
-      <Pressable 
-        style={styles.saveButton}
-        onPress={() => console.log('Save button pressed')}
-      >
-        <Text style={styles.saveButtonText}>Save</Text>
-      </Pressable>
-    </KeyboardAvoidingView>
-  );
-};
 
 export default CreateNote;

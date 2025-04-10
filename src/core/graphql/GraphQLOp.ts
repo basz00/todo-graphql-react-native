@@ -1,5 +1,5 @@
 import { RemoteState } from "@/core/entities";
-import { ApolloClient, DocumentNode, FetchPolicy } from "@apollo/client";
+import { OperationVariables } from "@apollo/client";
 import { cloneDeep } from "@apollo/client/utilities";
 import {
   BehaviorSubject,
@@ -12,20 +12,15 @@ import {
   tap,
 } from "rxjs";
 
-export class ReactiveQuery<T> {
-  private trigger$ = new Subject<void>();
+export abstract class GraphQLOp<T> {
+  private trigger$ = new Subject<OperationVariables | undefined>();
   private result$ = new BehaviorSubject<RemoteState<T>>({
     loading: false,
     data: null,
     error: null,
   });
 
-  constructor(
-    private client: ApolloClient<any>,
-    private query: DocumentNode,
-    private dataMapper: (rawData: any) => T,
-    private fetchPolicy: FetchPolicy = "network-only"
-  ) {
+  constructor(private dataMapper: (rawData: any) => T) {
     this.trigger$
       .pipe(
         tap(() => {
@@ -33,13 +28,8 @@ export class ReactiveQuery<T> {
             cloneDeep({ loading: true, data: null, error: null })
           );
         }),
-        switchMap(() =>
-          from(
-            this.client.query({
-              query: this.query,
-              fetchPolicy: this.fetchPolicy,
-            })
-          ).pipe(
+        switchMap((variables) =>
+          from(this.operationModule(variables)).pipe(
             tap((res) => {
               const mappedData = this.dataMapper(res.data);
               this.result$.next({
@@ -58,8 +48,10 @@ export class ReactiveQuery<T> {
       .subscribe();
   }
 
-  fetch() {
-    this.trigger$.next();
+  abstract operationModule(variables?: OperationVariables): Observable<any>;
+
+  execute(variables?: OperationVariables) {
+    this.trigger$.next(variables);
   }
 
   observe(): Observable<RemoteState<T>> {
