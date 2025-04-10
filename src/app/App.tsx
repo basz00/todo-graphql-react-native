@@ -1,6 +1,6 @@
 import React from "react";
-import { ThemeProvider } from "./core/ui/theme/ThemeContext";
-import NoteList from "./features/note/list/presentation/NoteList";
+import { ThemeProvider } from "../core/ui/theme/ThemeContext";
+import NoteList from "../features/note/list/presentation/ui/screens/NoteList";
 
 const App = () => {
   return (

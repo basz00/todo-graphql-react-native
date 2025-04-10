@@ -1,6 +1,6 @@
 {
   "name": "todographql",
-  "main": "src/index.tsx",
+  "main": "src/app/index.tsx",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",

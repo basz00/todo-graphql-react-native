@@ -1,7 +1,7 @@
 import { FlatList, View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import { useGetNoteList } from "./hooks";
-import NoteCard from "./ui/NoteCard";
+import { useGetNoteList } from "@/features/note/list/presentation/hooks";
+import NoteCard from "@/features/note/list/presentation/ui/components/NoteCard";
 
 const NoteList = () => {
   const { getNote, noteList } = useGetNoteList();
