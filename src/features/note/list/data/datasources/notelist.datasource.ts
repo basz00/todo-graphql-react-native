@@ -1,7 +1,7 @@
 import { apolloClient, QueryGraphQLOp } from "@/core/graphql";
 import { gql } from "@apollo/client";
-import { Observable, of } from "rxjs";
-import { Todo } from "../entities";
+import { Observable } from "rxjs";
+import { RemoteNote } from "@/note/common/entities";
 import { RemoteState } from "@/core/entities";
 
 const GET_TODOS = gql`
@@ -18,7 +18,7 @@ const GET_TODOS = gql`
 
 export class FetchNoteListFromApi {
   constructor(
-    private operation = new QueryGraphQLOp<Array<Todo>>(
+    private operation = new QueryGraphQLOp<Array<RemoteNote>>(
       apolloClient,
       GET_TODOS,
       (data) => data.todos
@@ -29,7 +29,7 @@ export class FetchNoteListFromApi {
     this.operation.execute();
   }
 
-  observeNotes(): Observable<RemoteState<Array<Todo>>> {
+  observeNotes(): Observable<RemoteState<Array<RemoteNote>>> {
     return this.operation.observe();
   }
 }

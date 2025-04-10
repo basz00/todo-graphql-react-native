@@ -1,6 +1,6 @@
 import { NoteListRepository } from "@/note/list/domain/repositories";
 import { map, Observable, of } from "rxjs";
-import { Note, NoteStatus } from "@/note/list/domain/entities";
+import { Note, NoteStatus } from "@/note/common/entities";
 import { FetchNoteListFromApi } from "@/note/list/data/datasources/notelist.datasource";
 import { RemoteState } from "@/core/entities";
 

@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { Note } from "@/note/list/domain/entities/note";
+import { Note } from "@/features/note/common/entities/note";
 import { RemoteState } from "@/core/entities";
 
 export interface NoteListRepository {

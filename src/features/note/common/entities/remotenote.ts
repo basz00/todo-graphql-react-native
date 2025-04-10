@@ -1,14 +1,14 @@
-export enum TodoStatus {
+export enum RemoteNoteStatus {
   Pending = "pending",
   Completed = "completed",
 }
 
-export interface Todo {
+export interface RemoteNote {
   id: number;
   createdAt: Date;
   updatedAt: Date;
   title: string;
   note: string;
-  status: TodoStatus;
+  status: RemoteNoteStatus;
   creatorId: number;
 }
