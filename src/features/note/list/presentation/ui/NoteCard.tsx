@@ -1,5 +1,7 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { useTheme } from "@/core/ui/theme/ThemeContext";
+import { colors as themeColors } from "@/core/ui/theme/colors";
 
 interface Props {
   title: string;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 const NoteCard = ({ title, note, createdAt, onPress }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -36,29 +41,31 @@ const NoteCard = ({ title, note, createdAt, onPress }: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: "#000",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 4,
-  },
-  note: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 4,
-  },
-  date: {
-    fontSize: 12,
-    color: "#999",
-  },
-});
+const makeStyles = (colors: typeof themeColors) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: colors.background.default,
+      padding: 16,
+      borderRadius: 8,
+      marginBottom: 8,
+      borderWidth: 1,
+      borderColor: colors.neutral.black,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 4,
+      color: colors.text.primary,
+    },
+    note: {
+      fontSize: 14,
+      color: colors.text.secondary,
+      marginBottom: 4,
+    },
+    date: {
+      fontSize: 12,
+      color: colors.text.disabled,
+    },
+  });
 
 export default NoteCard;
