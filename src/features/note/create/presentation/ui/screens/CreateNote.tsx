@@ -12,6 +12,7 @@ import {
 import { useTheme } from "@/core/ui/theme/ThemeContext";
 import { colors as themeColors } from "@/core/ui/theme/colors";
 import { useCreateNote } from "@/note/create/presentation/hooks";
+import { NoteInputCard } from "@/features/note/common/ui";
 
 const CreateNote = () => {
   const [title, setTitle] = useState("");
@@ -32,24 +33,14 @@ const CreateNote = () => {
         style={styles.container}
         contentContainerStyle={{ paddingBottom: 80 }} // Menyediakan ruang untuk tombol
       >
-        <View style={styles.card}>
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            placeholderTextColor={colors.text.disabled}
-            value={title}
-            onChangeText={setTitle}
-          />
-          <TextInput
-            style={[styles.input, styles.noteInput]}
-            placeholder="Note..."
-            placeholderTextColor={colors.text.disabled}
-            value={note}
-            onChangeText={setNote}
-            multiline
-            textAlignVertical="top"
-          />
-        </View>
+        <NoteInputCard
+          title={title}
+          note={note}
+          onChange={({ title, note }) => {
+            setTitle(title);
+            setNote(note);
+          }}
+        />
       </ScrollView>
 
       <Pressable
