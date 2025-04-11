@@ -25,7 +25,7 @@ const NoteList = () => {
             note={item.note}
             createdAt={"" + item.createdAt}
             onPress={() => {
-              navigate("CreateNote");
+              navigate("UpdateNote", { note: item });
             }}
           />
         )}

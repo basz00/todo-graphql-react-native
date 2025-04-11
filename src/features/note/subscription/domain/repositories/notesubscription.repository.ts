@@ -1,7 +1,6 @@
-import { RemoteState } from "@/core/entities";
-import { Note } from "@/features/note/common/entities";
+import { SubscriptionEvent } from "@/note/subscription/domain/entities";
 import { Observable } from "rxjs";
 
 export interface NoteSubscriptionRepository {
-  subscribeToNoteUpdate(): Observable<RemoteState<Note>>;
+  subscribeToNoteChange(): Observable<SubscriptionEvent>;
 }

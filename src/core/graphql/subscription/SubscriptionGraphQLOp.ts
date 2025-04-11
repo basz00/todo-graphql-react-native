@@ -1,6 +1,6 @@
 import { ApolloClient, DocumentNode, OperationVariables } from "@apollo/client";
 import { Observable, from } from "rxjs";
-import { GraphQLOp } from "../GraphQLOp";
+import { GraphQLOp } from "@/core/graphql/GraphQLOp";
 
 export class SubscriptionGraphQLOp<T> extends GraphQLOp<T> {
   constructor(

@@ -1,4 +1,4 @@
-import { Note } from "@/note/common/entities";
+import { Note, NoteStatus } from "@/note/common/entities";
 import { useEffect, useState } from "react";
 import { NoteListRepositoryImpl } from "@/note/list/data/repositories/notelist.repository";
 import { NoteListRepository } from "@/note/list/domain/repositories";
@@ -24,21 +24,48 @@ export const useGetNoteList = () => {
 
   useEffect(() => {
     const subscription = noteUpdateSubscription
-      .subscribeToNoteUpdate()
+      .subscribeToNoteChange()
       .subscribe((state) => {
-        const updatedNote = state.data;
-        if (updatedNote) {
+        if (state.type === "created") {
+          setNoteList((prevNotes) => [
+            ...prevNotes,
+            {
+              id: state.note.id,
+              createdAt: state.note.createdAt,
+              note: state.note.note,
+              title: state.note.title,
+              status: NoteStatus.Completed,
+              updatedAt: state.note.updatedAt,
+            },
+          ]);
+        }
+
+        if (state.type === "updated") {
           setNoteList((prevNotes) => {
             const index = prevNotes.findIndex((note) => {
-              return note.id === updatedNote.id;
+              return note.id === state.note.id;
             });
 
-            if (index !== -1) {
-              prevNotes[index] = updatedNote;
-              return [...prevNotes];
-            }
+            prevNotes[index] = {
+              id: state.note.id,
+              createdAt: state.note.createdAt,
+              note: state.note.note,
+              title: state.note.title,
+              status: NoteStatus.Completed,
+              updatedAt: state.note.updatedAt,
+            };
+            return [...prevNotes];
+          });
+        }
 
-            return [...prevNotes, updatedNote];
+        if (state.type === "deleted") {
+          setNoteList((prevNotes) => {
+            const index = prevNotes.findIndex((note) => {
+              return note.id === state.id;
+            });
+
+            prevNotes.splice(index, 1);
+            return [...prevNotes];
           });
         }
       });

@@ -6,5 +6,7 @@ export interface Note {
   createdAt: Date;
   updatedAt: Date;
 }
-
-export type NoteStatus = "pending" | "done";
+export enum NoteStatus {
+  Pending = "pending",
+  Completed = "completed",
+}
