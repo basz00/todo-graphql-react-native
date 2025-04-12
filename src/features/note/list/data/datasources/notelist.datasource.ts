@@ -4,9 +4,9 @@ import { Observable } from "rxjs";
 import { RemoteNote } from "@/note/common/entities";
 import { RemoteState } from "@/core/entities";
 
-const GET_TODOS = gql`
-  query GetTodos {
-    todos {
+const GET_NOTES = gql`
+  query GetNotes {
+    notes {
       id
       note
       title
@@ -20,8 +20,10 @@ export class FetchNoteListFromApi {
   constructor(
     private operation = new QueryGraphQLOp<Array<RemoteNote>>(
       apolloClient,
-      GET_TODOS,
-      (data) => data.todos
+      GET_NOTES,
+      (data) => {
+        return data.notes;
+      }
     )
   ) {}
 

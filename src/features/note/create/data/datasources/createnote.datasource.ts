@@ -5,9 +5,9 @@ import { CreateNote } from "@/note/create/data/entities";
 import { gql } from "@apollo/client";
 import { Observable } from "rxjs";
 
-const CREATE_TODO = gql`
-  mutation CreateTodo($title: String, $note: String!, $creatorId: ID) {
-    createTodo(title: $title, note: $note, creatorId: $creatorId) {
+const CREATE_NOTE = gql`
+  mutation CreateNote($title: String, $note: String!, $creatorId: ID) {
+    createNote(title: $title, note: $note, creatorId: $creatorId) {
       id
       title
       note
@@ -23,8 +23,8 @@ export class CreateNoteOnRemote {
   constructor(
     private reactiveMutation = new MutationGraphQLOp<RemoteNote>(
       apolloClient,
-      CREATE_TODO,
-      (data) => data.todos
+      CREATE_NOTE,
+      (data) => data.createNote
     )
   ) {}
 

@@ -5,14 +5,14 @@ import { gql } from "@apollo/client";
 import { Observable } from "rxjs";
 import { UpdateRemoteNote } from "@/note/update/data/entities";
 
-const UPDATE_TODO = gql`
-  mutation UpdateTodo(
+const UPDATE_NOTE = gql`
+  mutation UpdateNote(
     $id: ID!
     $title: String
     $note: String
     $status: String
   ) {
-    updateTodo(id: $id, title: $title, note: $note, status: $status) {
+    updateNote(id: $id, title: $title, note: $note, status: $status) {
       id
       title
       note
@@ -28,8 +28,8 @@ export class UpdateNoteOnRemote {
   constructor(
     private reactiveMutation = new MutationGraphQLOp<RemoteNote>(
       apolloClient,
-      UPDATE_TODO,
-      (data) => data.todos
+      UPDATE_NOTE,
+      (data) => data.updateNote
     )
   ) {}
 

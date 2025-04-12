@@ -5,7 +5,7 @@ import { SubscriptionPayload } from "@/note/subscription/data/entities";
 import { gql } from "@apollo/client";
 import { Observable } from "rxjs";
 
-const SUBSCRIPTION_UPDATED_TODOS = gql`
+const SUBSCRIPTION_NOTE_CHANGED = gql`
   subscription Subscription {
     noteChanged {
       type
@@ -25,7 +25,7 @@ export class NoteSubscriptionDataSource {
   constructor(
     private operation = new SubscriptionGraphQLOp<SubscriptionPayload>(
       apolloClient,
-      SUBSCRIPTION_UPDATED_TODOS,
+      SUBSCRIPTION_NOTE_CHANGED,
       (data) => {
         return data.noteChanged;
       }
