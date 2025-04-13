@@ -3,8 +3,8 @@ export interface Note {
   title: string;
   note: string;
   status: NoteStatus;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 export enum NoteStatus {
   Pending = "pending",

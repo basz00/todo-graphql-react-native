@@ -1,13 +1,13 @@
-import { RemoteNote } from "@/features/note/common/entities";
+import { Note } from "@/features/note/common/entities";
 
 export interface NoteCreatedEvent {
   type: "created";
-  note: RemoteNote;
+  note: Note;
 }
 
 export interface NoteUpdatedEvent {
   type: "updated";
-  note: RemoteNote;
+  note: Note;
 }
 
 export interface NoteDeletedEvent {

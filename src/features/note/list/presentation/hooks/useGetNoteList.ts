@@ -1,12 +1,11 @@
-import { Note, NoteStatus } from "@/note/common/entities";
-import { useEffect, useState } from "react";
+import { NoteSubscriptionRepositoryImpl } from "@/features/note/subscription/data/repositories";
+import { NoteSubscriptionRepository } from "@/features/note/subscription/domain/repositories";
+import { Note } from "@/note/common/entities";
 import { NoteListRepositoryImpl } from "@/note/list/data/repositories/notelist.repository";
 import { NoteListRepository } from "@/note/list/domain/repositories";
-import { NoteSubscriptionRepository } from "@/features/note/subscription/domain/repositories";
-import { NoteSubscriptionRepositoryImpl } from "@/features/note/subscription/data/repositories";
+import { useEffect, useState } from "react";
 
 export const useGetNoteList = () => {
-  // I'm not using usecase because it will not have a significant use, and repository is enough
   const noteListRepository: NoteListRepository = new NoteListRepositoryImpl();
   const noteUpdateSubscription: NoteSubscriptionRepository =
     new NoteSubscriptionRepositoryImpl();
@@ -27,50 +26,40 @@ export const useGetNoteList = () => {
       .subscribeToNoteChange()
       .subscribe((state) => {
         if (state.type === "created") {
-          setNoteList((prevNotes) => [
-            ...prevNotes,
-            {
-              id: state.note.id,
-              createdAt: state.note.createdAt,
-              note: state.note.note,
-              title: state.note.title,
-              status: NoteStatus.Completed,
-              updatedAt: state.note.updatedAt,
-            },
-          ]);
+          handleCreate(state.note);
         }
 
         if (state.type === "updated") {
-          setNoteList((prevNotes) => {
-            const index = prevNotes.findIndex((note) => {
-              return note.id === state.note.id;
-            });
-
-            prevNotes[index] = {
-              id: state.note.id,
-              createdAt: state.note.createdAt,
-              note: state.note.note,
-              title: state.note.title,
-              status: NoteStatus.Completed,
-              updatedAt: state.note.updatedAt,
-            };
-            return [...prevNotes];
-          });
+          handleUpdate(state.note);
         }
 
         if (state.type === "deleted") {
-          setNoteList((prevNotes) => {
-            const index = prevNotes.findIndex((note) => {
-              return note.id === state.id;
-            });
-
-            prevNotes.splice(index, 1);
-            return [...prevNotes];
-          });
+          handleDelete(state.id);
         }
       });
     return () => subscription.unsubscribe();
   }, []);
+
+  const handleCreate = (note: Note) => {
+    setNoteList((prevNotes) => [...prevNotes, note]);
+  };
+
+  const handleUpdate = (note: Note) => {
+    setNoteList((prevNotes) => {
+      const index = prevNotes.findIndex((n) => n.id === note.id);
+      prevNotes[index] = note;
+      return [...prevNotes];
+    });
+  };
+
+  const handleDelete = (id: number) => {
+    setNoteList((prevNotes) => {
+      const index = prevNotes.findIndex((n) => n.id === id);
+
+      prevNotes.splice(index, 1);
+      return [...prevNotes];
+    });
+  };
 
   return {
     getNote: () => {

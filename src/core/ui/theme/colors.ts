@@ -1,55 +1,48 @@
 export const colors = {
   primary: {
-    main: "#000000",
-    light: "#333333",
-    dark: "#000000",
+    base: "#F5F5F5",
+    soft: "#DCDCDC",
+    main: "#4B4B4B",
+    robust: "#1F1F1F",
+    heavy: "#000000",
   },
-
-  // Secondary colors
   secondary: {
-    main: "#000000",
-    light: "#333333",
-    dark: "#000000",
+    base: "#FFFFFF",
+    soft: "#E8E8E8",
+    main: "#A1A1A1",
+    robust: "#6B6B6B",
+    heavy: "#2E2E2E",
   },
-
-  // Neutral colors
-  neutral: {
-    white: "#FFFFFF",
-    black: "#000000",
-    grey: {
-      50: "#F9FAFB",
-      100: "#F3F4F6",
-      200: "#E5E7EB",
-      300: "#D1D5DB",
-      400: "#9CA3AF",
-      500: "#6B7280",
-      600: "#4B5563",
-      700: "#374151",
-      800: "#1F2937",
-      900: "#111827",
-    },
+  item: {
+    "10": "#FFFFFF",
+    "20": "#F0F1F4",
+    "30": "#DCDEE5",
+    "40": "#B9BDCB",
+    "50": "#878FA6",
+    "60": "#5D657E",
+    "70": "#2B2F3B",
   },
-
-  // Semantic colors
-  semantic: {
-    success: "#34C759",
-    error: "#FF3B30",
-    warning: "#FF9500",
-    info: "#5856D6",
-  },
-
-  // Background colors
   background: {
-    default: "#FFFFFF",
-    paper: "#FFFFFF",
-    dark: "#FFFFFF",
+    "10": "#2B2F3B",
+    "20": "#4E556A",
+    "30": "#78819B",
+    "40": "#D0D3DC",
+    "50": "#E8E9EE",
+    "60": "#F6F6F6",
+    "70": "#FFFFFF",
   },
-
-  // Text colors
-  text: {
-    primary: "#000000",
-    secondary: "#000000",
-    disabled: "#666666",
-    inverse: "#FFFFFF",
+  success: {
+    base: "#E6F4EA",
+    soft: "#A8D8B8",
+    main: "#4CAF50",
+    robust: "#2E7D32",
+    heavy: "#1B5E20",
+  },
+  error: {
+    base: "#FDECEA",
+    soft: "#F8B4A4",
+    main: "#E53935",
+    robust: "#C62828",
+    heavy: "#B71C1C",
   },
 };

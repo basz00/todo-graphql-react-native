@@ -18,14 +18,14 @@ const NoteInputCard = ({ title = "", note = "", onChange }: Props) => {
       <TextInput
         style={styles.input}
         placeholder="Title"
-        placeholderTextColor={colors.text.disabled}
+        // placeholderTextColor={colors.text.disabled}
         value={title}
         onChangeText={(text) => onChange({ title: text, note })}
       />
       <TextInput
         style={[styles.input, styles.noteInput]}
         placeholder="Note..."
-        placeholderTextColor={colors.text.disabled}
+        // placeholderTextColor={colors.text.disabled}
         value={note}
         onChangeText={(text) => onChange({ title, note: text })}
         multiline
@@ -38,24 +38,24 @@ const NoteInputCard = ({ title = "", note = "", onChange }: Props) => {
 const makeStyles = (colors: typeof themeColors) =>
   StyleSheet.create({
     card: {
-      backgroundColor: colors.background.paper,
+      // backgroundColor: colors.background.paper,
       borderRadius: 8,
       padding: 16,
       marginBottom: 16,
       borderWidth: 1,
-      borderColor: colors.neutral.black,
+      // borderColor: colors.neutral.black,
     },
     input: {
       fontSize: 16,
-      color: colors.text.primary,
+      // color: colors.text.primary,
       marginBottom: 16,
       paddingVertical: 8,
       borderBottomWidth: 1,
-      borderBottomColor: colors.neutral.black,
+      // borderBottomColor: colors.neutral.black,
     },
     noteInput: {
       fontSize: 14,
-      color: colors.text.primary,
+      // color: colors.text.primary,
       minHeight: 100,
       textAlignVertical: "top",
     },

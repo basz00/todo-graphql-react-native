@@ -1,8 +1,9 @@
-import { NoteListRepository } from "@/note/list/domain/repositories";
-import { map, Observable, of } from "rxjs";
-import { Note, NoteStatus } from "@/note/common/entities";
-import { FetchNoteListFromApi } from "@/note/list/data/datasources/notelist.datasource";
 import { RemoteState } from "@/core/entities";
+import { remoteNoteToNote } from "@/features/note/common/utils";
+import { Note } from "@/note/common/entities";
+import { FetchNoteListFromApi } from "@/note/list/data/datasources/notelist.datasource";
+import { NoteListRepository } from "@/note/list/domain/repositories";
+import { map, Observable } from "rxjs";
 
 export class NoteListRepositoryImpl implements NoteListRepository {
   constructor(
@@ -21,18 +22,8 @@ export class NoteListRepositoryImpl implements NoteListRepository {
         if (state.error)
           return { data: [], loading: false, error: state.error };
 
-        const notes = state.data.map((todo) => {
-          const status: NoteStatus =
-            todo.status === "pending" ? "pending" : "done";
-          const note: Note = {
-            id: todo.id,
-            title: todo.title,
-            note: todo.note,
-            createdAt: todo.createdAt,
-            updatedAt: todo.updatedAt,
-            status: status,
-          };
-          return note;
+        const notes = state.data.map((remoteNote) => {
+          return remoteNoteToNote(remoteNote);
         });
 
         return { data: notes, loading: false, error: null };

@@ -11,6 +11,7 @@ const GET_NOTES = gql`
       note
       title
       status
+      createdAt
       updatedAt
     }
   }

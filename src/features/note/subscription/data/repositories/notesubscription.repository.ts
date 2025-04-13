@@ -11,6 +11,7 @@ import {
   SubscriptionEvent,
 } from "@/note/subscription/domain/entities";
 import { ChangeType } from "@/note/subscription/data/entities";
+import { remoteNoteToNote } from "@/features/note/common/utils";
 
 export class NoteSubscriptionRepositoryImpl
   implements NoteSubscriptionRepository
@@ -22,7 +23,7 @@ export class NoteSubscriptionRepositoryImpl
   subscribeToNoteChange(): Observable<SubscriptionEvent> {
     return this.remoteDataSource.observeNotes().pipe(
       map((state) => {
-        // move this to helper class
+        // TODO: could be in a handler class?
         if (state.error) {
           return { error: state.error.message, type: "error" } as ErrorEvent;
         }
@@ -30,14 +31,14 @@ export class NoteSubscriptionRepositoryImpl
         if (state.data !== null) {
           if (state.data.type === ChangeType.CREATED) {
             return {
-              note: state.data.note,
+              note: remoteNoteToNote(state.data.note!),
               type: "created",
             } as NoteCreatedEvent;
           }
 
           if (state.data.type === ChangeType.UPDATED) {
             return {
-              note: state.data.note,
+              note: remoteNoteToNote(state.data.note!),
               type: "updated",
             } as NoteUpdatedEvent;
           }

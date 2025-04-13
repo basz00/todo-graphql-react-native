@@ -33,6 +33,3 @@ export const typography = {
     wider: 0.5,
   },
 };
-
-export type FontSize = keyof typeof typography.size;
-export type FontWeight = keyof typeof typography.weight;

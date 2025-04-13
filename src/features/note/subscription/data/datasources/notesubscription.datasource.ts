@@ -15,6 +15,7 @@ const SUBSCRIPTION_NOTE_CHANGED = gql`
         title
         note
         status
+        createdAt
         updatedAt
       }
     }
