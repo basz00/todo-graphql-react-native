@@ -17,10 +17,10 @@ export class NoteListRepositoryImpl implements NoteListRepository {
   observeNoteList(): Observable<RemoteState<Array<Note>>> {
     return this.remoteDataSource.observeNotes().pipe(
       map((state) => {
-        if (!state.data) return { data: [], loading: false, error: null };
-
         if (state.error)
           return { data: [], loading: false, error: state.error };
+
+        if (!state.data) return { data: [], loading: false, error: null };
 
         const notes = state.data.map((remoteNote) => {
           return remoteNoteToNote(remoteNote);

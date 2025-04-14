@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackParams } from "@/app/navigation";
 import { useDeleteNote, useUpdatenote } from "@/note/update/presentation/hooks";
-import NoteInputCard from "@/note/common/ui/components/NoteInputCard";
+import NoteForm from "@/features/note/common/ui/components/NoteForm";
 
 const UpdateNote = () => {
   const { params } = useRoute<RouteProp<StackParams, "UpdateNote">>();
@@ -41,7 +41,7 @@ const UpdateNote = () => {
 
   return (
     <View style={{ padding: 16 }}>
-      <NoteInputCard
+      <NoteForm
         title={form.title}
         note={form.note}
         onChange={({ title, note }) => setForm({ title, note })}

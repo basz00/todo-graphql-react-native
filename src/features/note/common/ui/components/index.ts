@@ -1,1 +1,1 @@
-export { default as NoteInputCard } from "./NoteInputCard";
+export { default as NoteForm } from "./NoteForm";
