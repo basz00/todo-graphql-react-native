@@ -1,50 +1,24 @@
-# Welcome to your Expo app 👋
+# Notes App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to Notes App!
 
-## Get started
+This is a fun react-native expo project that I update whenever I can that aims to show you how I usually approach a project.
 
-1. Install dependencies
+It is built with clean architecture approach in mind, and would also include testing (but later) and some other stuffs to!
 
-   ```bash
-   npm install
-   ```
+If you want to test this project out, you need to set up a backend server too, I'll explain it in the next section.
 
-2. Start the app
+## How To Run The Project
 
-   ```bash
-    npx expo start
-   ```
+✅ Make sure you have Node installed!
 
-In the output, you'll find options to open the app in a
+✅ Get the backend code at https://github.com/basz00/todo-graphql-server
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+✅ Checkout that code, and run "node index.js" inside the /src of it
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+✅ Your backend should be running!
 
-## Get a fresh project
+✅ Check your PC's IP, and then create a new .env file inside the Notes App (at the root) then add these two variables "EXPO_PUBLIC_GRAPHQL_URI=http://your.api.here:4000/graphql"
+"EXPO_PUBLIC_GRAPHQL_WS_URI=ws://your.api.here:4000/graphql"
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+✅ Run the app with npm run command
