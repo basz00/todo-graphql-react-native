@@ -33,16 +33,9 @@ const CreateNote = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
+      style={styles.parentContainer}
     >
-      <View
-        style={{
-          flex: 1,
-          gap: 16,
-          padding: 16,
-          backgroundColor: colors.background[70],
-        }}
-      >
+      <View style={styles.container}>
         <View style={styles.noteContainer}>
           <NoteForm
             title={title}
@@ -70,6 +63,15 @@ const CreateNote = () => {
 
 const makeStyles = (colors: typeof themeColors) =>
   StyleSheet.create({
+    parentContainer: {
+      flex: 1,
+    },
+    container: {
+      flex: 1,
+      gap: 16,
+      padding: 16,
+      backgroundColor: colors.background[70],
+    },
     noteContainer: {
       flex: 0.9,
       maxHeight: "90%",

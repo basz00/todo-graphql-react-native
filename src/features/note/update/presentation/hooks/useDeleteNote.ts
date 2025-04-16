@@ -3,9 +3,9 @@ import { DeleteNoteRepositoryImpl } from "@/note/update/data/repositories";
 import { DeleteNoteRepository } from "@/note/update/domain/repositories";
 import { skip } from "rxjs";
 
-export const useDeleteNote = () => {
-  const repository: DeleteNoteRepository = new DeleteNoteRepositoryImpl();
+const repository: DeleteNoteRepository = new DeleteNoteRepositoryImpl();
 
+export const useDeleteNote = () => {
   const [state, setState] = useState({ loading: false, success: false });
 
   useEffect(() => {

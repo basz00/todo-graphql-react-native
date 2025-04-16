@@ -63,7 +63,7 @@ const NoteCard = ({ title, note, createdAt, onPress }: Props) => {
       <Card
         header={renderHeader()}
         content={renderNote()}
-        style={{ gap: 8, padding: 16 }}
+        style={styles.card}
       />
     </Pressable>
   );
@@ -92,6 +92,10 @@ const makeStyles = (
     date: {
       fontSize: typography.size.xs,
       color: colors.secondary.robust,
+    },
+    card: {
+      gap: 8,
+      padding: 16,
     },
   });
 

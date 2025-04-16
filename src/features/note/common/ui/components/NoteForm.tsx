@@ -59,9 +59,6 @@ const NoteForm = ({ title = "", note = "", updatedAt, onChange }: Props) => {
   const renderHeader = () => (
     <View style={{ gap: 12 }}>
       {renderTitle()}
-      {/* {renderCreatedBy()}
-      {renderUpdatedAt()} */}
-      {/* <View /> */}
       <Divider />
     </View>
   );

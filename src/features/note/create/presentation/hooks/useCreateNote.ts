@@ -4,10 +4,9 @@ import { CreateNoteRepositoryImpl } from "@/note/create/data/repositories";
 import { useEffect, useState } from "react";
 import { skip } from "rxjs";
 
-export const useCreateNote = () => {
-  //TODO: this will be invoked every time a state is updated
-  const repository: CreateNoteRepository = new CreateNoteRepositoryImpl();
+const repository: CreateNoteRepository = new CreateNoteRepositoryImpl();
 
+export const useCreateNote = () => {
   const [state, setState] = useState({ loading: false, success: false });
 
   useEffect(() => {

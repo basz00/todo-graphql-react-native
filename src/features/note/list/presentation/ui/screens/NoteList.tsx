@@ -21,10 +21,11 @@ const NoteList = () => {
   const { getNote, noteList } = useGetNoteList();
   const { navigate } = useNavigation<NativeStackNavigationProp<StackParams>>();
 
-  const { colors, spacing } = useTheme();
-  const styles = makeStyles(colors, spacing);
-
   const { width } = useWindowDimensions();
+
+  const { colors, spacing } = useTheme();
+  const styles = makeStyles(colors, spacing, width);
+
   const columnGap = spacing.md;
   const contentContainerPaddingStart = spacing.md;
   const contentContainerPaddingEnd = spacing.md;
@@ -79,25 +80,8 @@ const NoteList = () => {
           </View>
         )}
       />
-      <View
-        style={{
-          height: 100,
-          width: width,
-          position: "absolute",
-          bottom: 0,
-          margin: "auto",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            backgroundColor: colors.background[70],
-            opacity: 0.7,
-            flex: 1,
-          }}
-        />
+      <View style={styles.footerContainer}>
+        <View style={styles.footerBackground} />
         {renderCreateButton()}
       </View>
     </View>
@@ -106,7 +90,8 @@ const NoteList = () => {
 
 const makeStyles = (
   colors: typeof colorTokens,
-  spacing: typeof spacingTokens
+  spacing: typeof spacingTokens,
+  screenWidth: number
 ) =>
   StyleSheet.create({
     container: {
@@ -115,6 +100,21 @@ const makeStyles = (
     },
     contentContainer: {
       paddingVertical: spacing.md,
+    },
+    footerContainer: {
+      height: 100,
+      width: screenWidth,
+      position: "absolute",
+      bottom: 0,
+      margin: "auto",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    footerBackground: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: colors.background[70],
+      opacity: 0.7,
+      flex: 1,
     },
   });
 

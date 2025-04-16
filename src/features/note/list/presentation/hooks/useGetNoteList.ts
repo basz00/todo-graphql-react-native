@@ -5,11 +5,11 @@ import { NoteListRepositoryImpl } from "@/note/list/data/repositories/notelist.r
 import { NoteListRepository } from "@/note/list/domain/repositories";
 import { useEffect, useState } from "react";
 
-export const useGetNoteList = () => {
-  const noteListRepository: NoteListRepository = new NoteListRepositoryImpl();
-  const noteUpdateSubscription: NoteSubscriptionRepository =
-    new NoteSubscriptionRepositoryImpl();
+const noteListRepository: NoteListRepository = new NoteListRepositoryImpl();
+const noteUpdateSubscription: NoteSubscriptionRepository =
+  new NoteSubscriptionRepositoryImpl();
 
+export const useGetNoteList = () => {
   const [noteList, setNoteList] = useState<Array<Note>>([]);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { RemoteState } from "@/core/entities";
 
 const GET_NOTES = gql`
   query GetNotes {
-    notes {
+    notes(orderBy: { field: "createdAt", direction: "desc" }) {
       id
       note
       title

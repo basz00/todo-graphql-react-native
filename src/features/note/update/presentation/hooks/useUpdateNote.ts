@@ -4,8 +4,9 @@ import { UpdateNoteRepository } from "@/note/update/domain/repositories";
 import { useEffect, useState } from "react";
 import { skip } from "rxjs";
 
+const repository: UpdateNoteRepository = new UpdateNoteRepositoryImpl();
+
 export const useUpdatenote = () => {
-  const repository: UpdateNoteRepository = new UpdateNoteRepositoryImpl();
   const [state, setState] = useState({ loading: false, success: false });
 
   useEffect(() => {
