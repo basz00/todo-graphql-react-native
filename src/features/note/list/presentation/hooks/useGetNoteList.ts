@@ -41,7 +41,7 @@ export const useGetNoteList = () => {
   }, []);
 
   const handleCreate = (note: Note) => {
-    setNoteList((prevNotes) => [...prevNotes, note]);
+    setNoteList((prevNotes) => [note, ...prevNotes]);
   };
 
   const handleUpdate = (note: Note) => {

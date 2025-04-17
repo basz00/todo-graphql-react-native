@@ -1,3 +1,4 @@
+import { useToast } from "@/core/toast/ToastContext";
 import { Button } from "@/core/ui/components";
 import { useTheme } from "@/core/ui/theme/ThemeContext";
 import { colors as themeColors } from "@/core/ui/theme/colors";
@@ -21,14 +22,25 @@ const CreateNote = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  const { show } = useToast();
+
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
 
   useEffect(() => {
     if (state.success) {
+      show("Note created!");
       goBack();
     }
   }, [state.success]);
+
+  const executeCreateNote = () => {
+    if (!title || !note) {
+      show("Please enter title and/or note");
+      return;
+    }
+    execute({ title, note });
+  };
 
   return (
     <KeyboardAvoidingView
@@ -50,8 +62,9 @@ const CreateNote = () => {
         <View>
           <Button
             onPress={() => {
-              execute({ title, note });
+              executeCreateNote();
             }}
+            disabled={state.loading}
           >
             <Text style={styles.saveButtonText}>Save</Text>
           </Button>

@@ -30,32 +30,6 @@ const NoteForm = ({ title = "", note = "", updatedAt, onChange }: Props) => {
     />
   );
 
-  const renderCreatedBy = () => {
-    return (
-      <View style={styles.headerRowContainer}>
-        <View style={styles.headerRowLabel}>
-          <Text style={styles.headerRowLabelFont}>Created By</Text>
-        </View>
-        <View style={styles.headerRowContent}>
-          <Text style={styles.headerRowContentFont}>User Isme</Text>
-        </View>
-      </View>
-    );
-  };
-
-  const renderUpdatedAt = () => {
-    return (
-      <View style={styles.headerRowContainer}>
-        <View style={styles.headerRowLabel}>
-          <Text style={styles.headerRowLabelFont}>Last modified</Text>
-        </View>
-        <View style={styles.headerRowContent}>
-          <Text style={styles.headerRowContentFont}>19 March 2021, 12:00</Text>
-        </View>
-      </View>
-    );
-  };
-
   const renderHeader = () => (
     <View style={{ gap: 12 }}>
       {renderTitle()}
@@ -117,6 +91,7 @@ const makeStyles = (
       fontSize: typography.size.md,
       color: colors.primary.heavy,
       textAlignVertical: "top",
+      flex: 1,
     },
   });
 

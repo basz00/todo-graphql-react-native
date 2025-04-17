@@ -7,7 +7,8 @@
       "@/graphql/*": ["./src/core/graphql/*"],
       "@/graphql": ["./src/core/graphql"],
       "@/note/*": ["./src/features/note/*"],
-      "@/core/*": ["./src/core/*"]
+      "@/core/*": ["./src/core/*"],
+      "@/navigation/*": ["./src/app/navigation/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
