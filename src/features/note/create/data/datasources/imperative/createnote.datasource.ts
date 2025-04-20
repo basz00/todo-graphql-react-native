@@ -2,22 +2,8 @@ import { RemoteState } from "@/core/entities";
 import { apolloClient, MutationGraphQLOp } from "@/core/graphql";
 import { RemoteNote } from "@/features/note/common/entities";
 import { CreateNote } from "@/note/create/data/entities";
-import { gql } from "@apollo/client";
 import { Observable } from "rxjs";
-
-const CREATE_NOTE = gql`
-  mutation CreateNote($title: String, $note: String!, $creatorId: ID) {
-    createNote(title: $title, note: $note, creatorId: $creatorId) {
-      id
-      title
-      note
-      status
-      creatorId
-      createdAt
-      updatedAt
-    }
-  }
-`;
+import { CREATE_NOTE } from "../query";
 
 export class CreateNoteOnRemote {
   constructor(
